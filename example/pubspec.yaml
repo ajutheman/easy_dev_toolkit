@@ -1,0 +1,17 @@
+name: example
+description: Example app for easy_dev_toolkit
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  easy_dev_toolkit:
+    path: /Users/ajmalm/projectfile/package/easy_dev_toolkit
+
+
+flutter:
+  uses-material-design: true
