@@ -197,6 +197,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
             // 6. Generic List Tiles
             AdaptiveListTile(
+              title: "Networking Demo (EasyApi)",
+              subtitle: "Fetching from JSONPlaceholder",
+              leading: Icons.cloud_download_outlined,
+              trailing: const Icon(Icons.arrow_forward_ios, size: 14),
+              onTap: () => context.push(const NetworkDemoScreen()),
+            ),
+            AdaptiveListTile(
               title: "View Documentation",
               leading: Icons.book_outlined,
               trailing: const Icon(Icons.arrow_forward_ios, size: 14),
@@ -205,6 +212,89 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class NetworkDemoScreen extends StatefulWidget {
+  const NetworkDemoScreen({super.key});
+
+  @override
+  State<NetworkDemoScreen> createState() => _NetworkDemoScreenState();
+}
+
+class _NetworkDemoScreenState extends State<NetworkDemoScreen> {
+  List<dynamic> _posts = [];
+  bool _loading = false;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+
+    final response = await EasyApi.get(
+      'https://jsonplaceholder.typicode.com/posts',
+      useCache: true,
+      ttl: const Duration(minutes: 5),
+    );
+
+    if (response.isSuccess) {
+      setState(() {
+        _posts = (response.data as List).take(10).toList();
+        _loading = false;
+      });
+    } else {
+      setState(() {
+        _error = response.error;
+        _loading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: EasyAppBar.simple(title: "EasyApi Demo"),
+      body: _loading
+          ? const Center(child: CircularProgressIndicator())
+          : _error != null
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.error_outline, size: 60, color: Colors.red),
+                      SizedBox(height: 16.h),
+                      Text("Error: $_error"),
+                      const SizedBox(height: 16),
+                      AdaptiveButton(text: "Retry", onPressed: _fetchData),
+                    ],
+                  ),
+                )
+              : RefreshIndicator(
+                  onRefresh: _fetchData,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: _posts.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 12),
+                    itemBuilder: (context, i) {
+                      final post = _posts[i];
+                      return ReusableCard(
+                        title: post['title'],
+                        subtitle: post['body'],
+                        icon: Icons.article_outlined,
+                        onTap: () {},
+                      );
+                    },
+                  ),
+                ),
     );
   }
 }

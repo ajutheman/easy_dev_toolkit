@@ -1,3 +1,9 @@
+## 0.1.5
+
+* Added `EasyApi`: A high-level static networking wrapper with integrated caching and retries.
+* Added `RetryInterceptor` for resilient HTTP requests.
+* Added a Networking Demo to the example dashboard.
+
 ## 0.1.4
 
 * Overhauled the `example` project with a premium dashboard showcasing all major features (Responsive sizing, GlassCard, DateSelectors, Adaptive widgets, etc.).
