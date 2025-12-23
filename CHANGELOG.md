@@ -1,3 +1,8 @@
+## 0.1.4
+
+* Overhauled the `example` project with a premium dashboard showcasing all major features (Responsive sizing, GlassCard, DateSelectors, Adaptive widgets, etc.).
+* Fixed minor bugs in the example navigation.
+
 ## 0.1.3
 
 * Added `HorizontalDateSelector` widget (scrolling date picker).
@@ -9,6 +14,7 @@
 * Shortened package description and fixed repository URLs in `pubspec.yaml` for better Score.
 * Added `AdaptiveBadge` widget.
 * Added documentation comments to public API members (`AdaptiveButton`, `AdaptiveBadge`, etc.).
+* Added a comprehensive example showcasing all major features.
 * Updated dependencies to latest stable versions.
 
 ## 0.1.1
