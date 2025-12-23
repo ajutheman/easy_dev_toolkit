@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 
-class EasyTheme {
-  static ThemeData light({Color primary = Colors.blue}) {
+class EasyTheme extends ChangeNotifier {
+  static final EasyTheme instance = EasyTheme._();
+  EasyTheme._();
+
+  ThemeMode _mode = ThemeMode.light;
+
+  /// Current theme mode (light, dark, or system)
+  static ThemeMode get mode => instance._mode;
+
+  /// Toggle between light and dark modes
+  static void toggle() {
+    instance._mode =
+        instance._mode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    instance.notifyListeners();
+  }
+
+  /// Explicitly set the theme mode
+  static void set(ThemeMode mode) {
+    instance._mode = mode;
+    instance.notifyListeners();
+  }
+
+  static ThemeData light({Color primary = const Color(0xFF2196F3)}) {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: primary),
       useMaterial3: true,
@@ -25,7 +46,7 @@ class EasyTheme {
     );
   }
 
-  static ThemeData dark({Color primary = Colors.blue}) {
+  static ThemeData dark({Color primary = const Color(0xFF2196F3)}) {
     final base = ThemeData.dark(useMaterial3: true);
     return base.copyWith(
       colorScheme: ColorScheme.fromSeed(
@@ -48,6 +69,18 @@ class EasyTheme {
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
+      ),
+    );
+  }
+
+  /// AMOLED theme variant
+  static ThemeData amoled() {
+    return dark(primary: Colors.blue).copyWith(
+      scaffoldBackgroundColor: Colors.black,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.blue,
+        brightness: Brightness.dark,
+        surface: Colors.black,
       ),
     );
   }

@@ -9,8 +9,9 @@ Easy Dev Toolkit is a Flutter helper package designed to speed up UI development
 
 ## 🚀 Features
 
-- 🔹 **Responsive Design**: Screen size & font scaling extensions (`.w`, `.h`, `.sp`).
+- 🔹 **Responsive Design**: `ResponsiveBuilder`, screen scaling (`.w`, `.h`), and context helpers (`isTablet`, `isDesktop`).
 - 🔹 **Adaptive UI**: Material & iOS adaptive widgets (Buttons, TextFields, Dialogs).
+- 🔹 **Theme Management**: `EasyTheme` for dynamic light/dark mode switching.
 - 🔹 **Context Extensions**: Easy navigation and theme access (`context.push`, `context.theme`).
 - 🔹 **Utility Extensions**: Validation and formatting for `String` and `DateTime`.
 - 🔹 **Storage**: Easy `SharedPreferences` wrapper (`AppStorage`).
@@ -48,9 +49,18 @@ Container(
 
 Text("Scaling Text", style: TextStyle(fontSize: 16.sp));
 
-// 3. Navigation & Context
+// 3. Responsive Layouts
+ResponsiveBuilder(
+  mobile: Text("Mobile View"),
+  tablet: Text("Tablet View"),
+  desktop: Text("Desktop View"),
+);
+
+if (context.isTablet) { ... }
+
+// 4. Navigation & Theme
 context.push(NextScreen());
-context.pop();
+EasyTheme.toggle(); // Switch Light/Dark
 bool isDark = context.isDarkMode;
 ```
 

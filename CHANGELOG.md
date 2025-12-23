@@ -1,3 +1,18 @@
+## 0.2.0 (Pro Upgrade Phase 1)
+* **Responsive System**: 
+    * Standardized `Breakpoints` constants (Tablet: 600, Desktop: 1200).
+    * Updated `ResponsiveBuilder` for breakpoint-aware layouts.
+    * Added `ContextExtensions` helpers: `isTablet`, `isDesktop`, `isLandscape`.
+* **Advanced UI**:
+    * Added `EasyTheme` controller for runtime theme switching (Light/Dark/System).
+    * Added `GlassCard` gradient support.
+    * Added `AppRadius`, `AppSpacing`, `AppDurations` design tokens.
+* **Utilities**:
+    * Added `EasyDebounce` and `EasyThrottle` for event handling.
+    * added `setStateSafe` extension.
+* **Breaking Changes**:
+    * Renamed/Refactored `BreakPoints` to `Breakpoints` with static constants.
+
 ## 0.1.6
 
 * **Major Example Overhaul**: Added `UtilitiesDemoScreen` and `UIDemoScreen` to showcase every feature (Encryption, Storage, SkeletonLoaders, etc.).

@@ -21,12 +21,15 @@ class GlassCard extends StatelessWidget {
     this.opacity = 0.1,
     this.borderRadius = 20.0,
     this.color = Colors.white,
+    this.gradient,
     this.padding,
     this.margin,
     this.width,
     this.height,
     this.border,
   });
+
+  final Gradient? gradient;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,8 @@ class GlassCard extends StatelessWidget {
           child: Container(
             padding: padding,
             decoration: BoxDecoration(
-              color: color.withValues(alpha: opacity),
+              color: gradient == null ? color.withValues(alpha: opacity) : null,
+              gradient: gradient,
               borderRadius: BorderRadius.circular(borderRadius),
               border: border ??
                   Border.all(

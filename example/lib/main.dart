@@ -16,12 +16,18 @@ class DemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Easy Dev Toolkit Showcase",
-      debugShowCheckedModeBanner: false,
-      theme: EasyTheme.light(),
-      darkTheme: EasyTheme.dark(),
-      home: const DashboardScreen(),
+    return ListenableBuilder(
+      listenable: EasyTheme.instance,
+      builder: (context, _) {
+        return MaterialApp(
+          title: "Easy Dev Toolkit Pro",
+          debugShowCheckedModeBanner: false,
+          theme: EasyTheme.light(),
+          darkTheme: EasyTheme.dark(),
+          themeMode: EasyTheme.mode,
+          home: const DashboardScreen(),
+        );
+      },
     );
   }
 }
@@ -37,6 +43,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final TextEditingController _searchController = TextEditingController();
   int _selectedDateIndex = 0;
 
+  Widget _responsiveCard(String title, Color color, IconData icon) {
+    return Container(
+      padding: EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: AppRadius.roundedMd,
+        border: Border.all(color: color.withValues(alpha: 0.5)),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: color),
+          AppSpacing.gutterMd,
+          Text(
+            title,
+            style: context.textTheme.titleMedium?.copyWith(
+              color: color,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Initialize responsive sizing
@@ -44,8 +74,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       appBar: EasyAppBar.simple(
-        title: "Toolkit Showcase",
+        title: "Toolkit Pro Showcase",
         actions: [
+          IconButton(
+            icon: Icon(context.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+            onPressed: () => EasyTheme.toggle(),
+          ),
           IconButton(
             icon: const Icon(Icons.calendar_month),
             onPressed: () => context.push(const FullCalendarScreen()),
@@ -66,6 +100,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 name: "John Developer",
                 email: "john.dev@toolkit.com",
                 avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+              ),
+            ),
+            
+            SizedBox(height: 16.h),
+
+            // Pro: Responsive Builder Section
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: ResponsiveBuilder(
+                mobile: _responsiveCard("Mobile Layout Active", Colors.orange, Icons.phone_android),
+                tablet: _responsiveCard("Tablet Layout Active", Colors.green, Icons.tablet_mac),
+                desktop: _responsiveCard("Desktop Layout Active", Colors.blue, Icons.desktop_windows),
               ),
             ),
             
@@ -158,8 +204,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     SizedBox(height: 16.h),
                     AdaptiveTextField(
                       controller: _searchController,
-                      label: "Search Projects",
+                      label: "Search Projects (Debounced)",
                       prefixIcon: const Icon(Icons.search),
+                      onChanged: (val) {
+                        EasyDebounce.run("search", AppDurations.medium, () {
+                          EasyToast.show("Debounced Search: $val");
+                        });
+                      },
                     ),
                     SizedBox(height: 16.h),
                     AdaptiveButton.filled(

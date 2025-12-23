@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../core/breakpoints.dart';
 import '../core/responsive_extensions.dart';
+import '../core/context_extensions.dart';
 
 class AdaptiveGrid extends StatelessWidget {
   final List<Widget> children;
@@ -8,22 +9,22 @@ class AdaptiveGrid extends StatelessWidget {
 
   const AdaptiveGrid({super.key, required this.children, this.spacing = 12});
 
-  int _columns() {
-    if (BreakPoints.isDesktop) return 4;
-    if (BreakPoints.isTablet) return 3;
+  int _columns(BuildContext context) {
+    if (context.isDesktop) return 4;
+    if (context.isTablet) return 3;
     return 2;
   }
 
   @override
   Widget build(BuildContext context) {
-    final col = _columns();
+    final col = _columns(context);
 
     return GridView.count(
       crossAxisCount: col,
       padding: EdgeInsets.all(12.w),
       mainAxisSpacing: spacing.h,
       crossAxisSpacing: spacing.w,
-      childAspectRatio: BreakPoints.isPhone ? 0.8 : 1.2,
+      childAspectRatio: context.width < Breakpoints.tablet ? 0.8 : 1.2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       children: children,

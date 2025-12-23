@@ -22,7 +22,10 @@ class AdaptiveTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.validator,
+    this.onChanged,
   });
+
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,7 @@ class AdaptiveTextField extends StatelessWidget {
         validator: validator,
         style: TextStyle(fontSize: 15.sp),
         prefix: prefixIcon,
+        onChanged: onChanged,
       );
     }
 
@@ -45,6 +49,7 @@ class AdaptiveTextField extends StatelessWidget {
       obscureText: obscure,
       keyboardType: keyboardType,
       validator: validator,
+      onChanged: onChanged,
       style: TextStyle(fontSize: 15.sp),
       decoration: InputDecoration(
         labelText: label,
