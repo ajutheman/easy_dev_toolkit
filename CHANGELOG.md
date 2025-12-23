@@ -1,3 +1,8 @@
+## 0.1.3
+
+* Added `HorizontalDateSelector` widget (scrolling date picker).
+* Improved `AdaptiveButton` with documented parameters.
+
 ## 0.1.2
 
 * Fixed deprecated `Color.withOpacity` (replaced with `Color.withValues`).

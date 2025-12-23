@@ -32,6 +32,7 @@ export 'widgets/textfields/adaptive_textfield.dart';
 export 'widgets/cards/reusable_card.dart';
 export 'widgets/cards/glass_card.dart';
 export 'widgets/calendar/time_log_calendar.dart';
+export 'widgets/calendar/horizontal_date_selector.dart';
 export 'widgets/list_tiles/adaptive_list_tile.dart';
 export 'widgets/app_bars.dart';
 export 'widgets/dialogs.dart';

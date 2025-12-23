@@ -26,7 +26,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  easy_dev_toolkit: ^0.1.2
+  easy_dev_toolkit: ^0.1.3
 ```
 
 ---
@@ -69,5 +69,15 @@ GlassCard(
 TimeLogCalendar(
   initialDate: DateTime.now(),
   onDateSelected: (date) => print(date),
+)
+```
+
+### HorizontalDateSelector
+```dart
+HorizontalDateSelector(
+  days: List.generate(30, (i) => DateSelectorDay.fromDateTime(
+    DateTime.now().add(Duration(days: i)),
+  )),
+  onDateSelected: (index) => print("Selected index: $index"),
 )
 ```
