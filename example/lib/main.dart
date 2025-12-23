@@ -195,7 +195,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             
             SizedBox(height: 24.h),
 
-            // 6. Generic List Tiles
+            // 6. Networking & Utilities
             AdaptiveListTile(
               title: "Networking Demo (EasyApi)",
               subtitle: "Fetching from JSONPlaceholder",
@@ -204,10 +204,214 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onTap: () => context.push(const NetworkDemoScreen()),
             ),
             AdaptiveListTile(
-              title: "View Documentation",
-              leading: Icons.book_outlined,
+              title: "Utilities & Security",
+              subtitle: "Encryption, Storage, & Validators",
+              leading: Icons.settings_suggest_outlined,
               trailing: const Icon(Icons.arrow_forward_ios, size: 14),
-              onTap: () {},
+              onTap: () => context.push(const UtilitiesDemoScreen()),
+            ),
+            AdaptiveListTile(
+              title: "UI & Feedback",
+              subtitle: "Dialogs, Loaders, & Skeletons",
+              leading: Icons.brush_outlined,
+              trailing: const Icon(Icons.arrow_forward_ios, size: 14),
+              onTap: () => context.push(const UIDemoScreen()),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class UtilitiesDemoScreen extends StatefulWidget {
+  const UtilitiesDemoScreen({super.key});
+
+  @override
+  State<UtilitiesDemoScreen> createState() => _UtilitiesDemoScreenState();
+}
+
+class _UtilitiesDemoScreenState extends State<UtilitiesDemoScreen> {
+  final TextEditingController _encryptController = TextEditingController();
+  final TextEditingController _storageKeyController = TextEditingController();
+  final TextEditingController _storageValueController = TextEditingController();
+  
+  String _encryptedText = "";
+  String _decryptedText = "";
+  String _storedValue = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: EasyAppBar.simple(title: "Utilities & Security"),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _sectionTitle("Encryption (AES-256)"),
+            AdaptiveTextField(
+              controller: _encryptController,
+              label: "Text to Encrypt",
+              hint: "Enter sensitive data",
+            ),
+            SizedBox(height: 12.h),
+            Row(
+              children: [
+                Expanded(
+                  child: AdaptiveButton(
+                    text: "Encrypt",
+                    onPressed: () {
+                      if (_encryptController.text.isEmpty) return;
+                      setState(() {
+                        _encryptedText = EncryptionUtil.encrypt(_encryptController.text);
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                Expanded(
+                  child: AdaptiveButton.filled(
+                    text: "Decrypt",
+                    onPressed: () {
+                      if (_encryptedText.isEmpty) return;
+                      setState(() {
+                        _decryptedText = EncryptionUtil.decrypt(_encryptedText);
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            if (_encryptedText.isNotEmpty) ...[
+              SizedBox(height: 8.h),
+              Text("Encrypted: $_encryptedText", style: context.textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic)),
+            ],
+            if (_decryptedText.isNotEmpty) ...[
+              SizedBox(height: 4.h),
+              Text("Decrypted: $_decryptedText", style: context.textTheme.bodyMedium?.copyWith(color: Colors.green, fontWeight: FontWeight.bold)),
+            ],
+
+            SizedBox(height: 32.h),
+            _sectionTitle("Local Storage (AppStorage)"),
+            AdaptiveTextField(
+              controller: _storageKeyController,
+              label: "Key",
+            ),
+            SizedBox(height: 8.h),
+            AdaptiveTextField(
+              controller: _storageValueController,
+              label: "Value",
+            ),
+            SizedBox(height: 12.h),
+            Row(
+              children: [
+                Expanded(
+                  child: AdaptiveButton(
+                    text: "Save",
+                    onPressed: () async {
+                      await AppStorage.write(_storageKeyController.text, _storageValueController.text);
+                      EasyToast.show("Saved successfully");
+                    },
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                Expanded(
+                  child: AdaptiveButton.filled(
+                    text: "Read",
+                    onPressed: () async {
+                      final val = AppStorage.read<String>(_storageKeyController.text);
+                      setState(() => _storedValue = val ?? "Not found");
+                    },
+                  ),
+                ),
+              ],
+            ),
+            if (_storedValue.isNotEmpty) ...[
+              SizedBox(height: 12.h),
+              Text("Result: $_storedValue", style: context.textTheme.titleMedium),
+            ],
+
+            SizedBox(height: 32.h),
+            _sectionTitle("Extensions Showcase"),
+            _extensionItem("String.capitalize()", "hello world".capitalize()),
+            _extensionItem("String.isValidEmail", "test@mail".isValidEmail.toString()),
+            _extensionItem("DateTime.timeAgo", DateTime.now().subtract(const Duration(hours: 5)).timeAgo()),
+            _extensionItem("Responsive Sizing", "Width: ${100.w.toStringAsFixed(1)}, Height: ${100.h.toStringAsFixed(1)}"),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _sectionTitle(String title) => Padding(
+    padding: EdgeInsets.only(bottom: 12.h),
+    child: Text(title, style: context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+  );
+
+  Widget _extensionItem(String title, String result) => Padding(
+    padding: EdgeInsets.only(bottom: 8.h),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title, style: context.textTheme.bodyMedium),
+        Text(result, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.blue)),
+      ],
+    ),
+  );
+}
+
+class UIDemoScreen extends StatelessWidget {
+  const UIDemoScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: EasyAppBar.simple(title: "UI & Feedback"),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("Skeleton Loader Demo", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            SizedBox(height: 12.h),
+            const SkeletonLoader(height: 100, borderRadius: 12),
+            SizedBox(height: 12.h),
+            Row(
+              children: [
+                const SkeletonLoader(width: 60, height: 60, shape: BoxShape.circle),
+                SizedBox(width: 12.w),
+                const Expanded(
+                  child: Column(
+                    children: [
+                      SkeletonLoader(height: 14),
+                      SizedBox(height: 8),
+                      SkeletonLoader(height: 14, width: 150),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 32.h),
+            const Text("Feedback Components", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            SizedBox(height: 12.h),
+            AdaptiveButton(
+              text: "Show Adaptive Dialog",
+              onPressed: () => EasyDialog.show(
+                context,
+                title: "Confirm Action",
+                message: "This will demonstrate the adaptive nature of our toolkit.",
+                onConfirm: () => EasyToast.show("Confirmed!"),
+              ),
+            ),
+            SizedBox(height: 12.h),
+            AdaptiveButton.filled(
+              text: "Show Loading Overlay",
+              onPressed: () {
+                EasyLoader.show(context);
+                Future.delayed(const Duration(seconds: 2), () => EasyLoader.hide(context));
+              },
             ),
           ],
         ),

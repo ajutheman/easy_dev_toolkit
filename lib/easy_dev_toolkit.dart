@@ -40,6 +40,7 @@ export 'widgets/calendar/horizontal_date_selector.dart';
 export 'widgets/list_tiles/adaptive_list_tile.dart';
 export 'widgets/app_bars.dart';
 export 'widgets/dialogs.dart';
+export 'widgets/easy_dialog.dart';
 export 'widgets/loaders.dart';
 export 'widgets/list_tiles/smart_list_tile.dart';
 export 'widgets/skeleton/skeleton_loader.dart';

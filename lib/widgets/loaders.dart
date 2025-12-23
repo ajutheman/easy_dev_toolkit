@@ -6,6 +6,22 @@ class EasyLoader {
     return Center(child: _platformLoader(size: size));
   }
 
+  /// Shows a global loading overlay.
+  static void show(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  /// Hides the loading overlay.
+  static void hide(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
   static Widget _platformLoader({double size = 24}) {
     return Builder(
       builder: (context) {

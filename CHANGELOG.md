@@ -1,3 +1,14 @@
+## 0.1.6
+
+* **Major Example Overhaul**: Added `UtilitiesDemoScreen` and `UIDemoScreen` to showcase every feature (Encryption, Storage, SkeletonLoaders, etc.).
+* **API Standardization**: 
+    * Standardized `AppStorage` with `read`/`write` aliases.
+    * Standardized `EncryptionUtil` with `encrypt`/`decrypt` static aliases.
+    * Added `SkeletonLoader` for shimmering loading states.
+    * Standardized `EasyLoader` with `show`/`hide` methods.
+    * Added `EasyDialog` for simplified adaptive dialog calls.
+* **Documentation**: Overhauled `README.md` with categorized API guides and detailed code snippets.
+
 ## 0.1.5
 
 * Added `EasyApi`: A high-level static networking wrapper with integrated caching and retries.

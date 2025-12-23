@@ -26,58 +26,94 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  easy_dev_toolkit: ^0.1.5
+  easy_dev_toolkit: ^0.1.6
 ```
 
 ---
 
-## 🛠 Usage Examples
+## 🛠 Usage & API Guide
 
-### Context & Navigation
+### 1. Responsive & Context Utilities
+Get screen dimensions and scale fonts/sizes easily.
+
 ```dart
+// 1. Initialize in main or first build
+SizeConfig.init(context);
+
+// 2. Use scaling extensions
+Container(
+  width: 50.w,   // 50% of screen width
+  height: 200.h, // 200 scaled height units
+)
+
+Text("Scaling Text", style: TextStyle(fontSize: 16.sp));
+
+// 3. Navigation & Context
 context.push(NextScreen());
 context.pop();
-print(context.width);
-Color primary = context.colorScheme.primary;
+bool isDark = context.isDarkMode;
 ```
 
-### String Validations
+### 2. Networking (EasyApi)
+A high-level wrapper with integrated caching and retries.
+
 ```dart
-if ("email@example.com".isValidEmail) {
-  print("Valid email!");
+// Fetch data with 5-minute cache
+final response = await EasyApi.get(
+  'https://api.example.com/data',
+  useCache: true,
+  ttl: Duration(minutes: 5),
+);
+
+if (response.isSuccess) {
+  print(response.data);
+} else {
+  print(response.error);
 }
 ```
 
-### Storage
+### 3. Storage & Security
+Safe and encrypted local persistence.
+
 ```dart
+// Secure Encryption (AES-256)
+String secret = EncryptionUtil.encrypt("My Password");
+String original = EncryptionUtil.decrypt(secret);
+
+// Local Storage
 await AppStorage.init();
-AppStorage.saveString("user_name", "John Doe");
-String? name = AppStorage.getString("user_name");
+AppStorage.write("theme", "dark");
+String theme = AppStorage.read<String>("theme") ?? "light";
 ```
 
-### GlassCard
+### 4. Advanced UI Components
+Modern, production-ready widgets.
+
 ```dart
+// Glassmorphism
 GlassCard(
-  child: Text("I am on glass!"),
-  blur: 15,
-  opacity: 0.2,
+  child: Text("Glass Effect"),
+  blur: 20,
+  opacity: 0.1,
 )
-```
 
-### TimeLogCalendar
-```dart
-TimeLogCalendar(
-  initialDate: DateTime.now(),
-  onDateSelected: (date) => print(date),
-)
-```
+// Shimmering Skeleton
+SkeletonLoader(height: 100, borderRadius: 12)
 
-### HorizontalDateSelector
-```dart
+// Horizontal Date Selector
 HorizontalDateSelector(
-  days: List.generate(30, (i) => DateSelectorDay.fromDateTime(
-    DateTime.now().add(Duration(days: i)),
-  )),
-  onDateSelected: (index) => print("Selected index: $index"),
+  days: myDayList,
+  onDateSelected: (index) => print(index),
 )
+
+// Adaptive Dialog & Loader
+EasyDialog.show(context, title: "Alert", message: "Success!");
+EasyLoader.show(context); // Global overlay
+```
+
+### 5. String & Date Extensions
+```dart
+"hello".capitalize(); // "Hello"
+"test@mail.com".isValidEmail; // true
+DateTime.now().timeAgo(); // "Just now"
 ```

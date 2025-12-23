@@ -119,7 +119,7 @@ packages:
       path: "/Users/ajmalm/projectfile/package/easy_dev_toolkit"
       relative: false
     source: path
-    version: "0.1.5"
+    version: "0.1.6"
   encrypt:
     dependency: transitive
     description:

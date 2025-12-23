@@ -14,6 +14,18 @@ class EncryptionUtil {
       : key = Key.fromBase64(base64Key),
         iv = IV.fromBase64(base64Iv);
 
+  /// Default instance using a fixed key for easy demo purposes.
+  static final EncryptionUtil instance = EncryptionUtil(
+    'mYfW6vG8xQ3z1kL5nB2pA7rT9uX4cE6w0v+S8h/R7jY=',
+    'aB3c4D5e6F7g8H9i0J1k2L==',
+  );
+
+  /// Alias for [encryptString] using the default instance.
+  static String encrypt(String plainText) => instance.encryptString(plainText);
+
+  /// Alias for [decryptToString] using the default instance.
+  static String decrypt(String base64) => instance.decryptToString(base64);
+
   /// Encrypts a JSON-serializable object.
   String encryptJson(dynamic obj) {
     try {
