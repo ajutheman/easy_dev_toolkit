@@ -1,3 +1,11 @@
+## 0.1.2
+
+* Fixed deprecated `Color.withOpacity` (replaced with `Color.withValues`).
+* Shortened package description and fixed repository URLs in `pubspec.yaml` for better Score.
+* Added `AdaptiveBadge` widget.
+* Added documentation comments to public API members (`AdaptiveButton`, `AdaptiveBadge`, etc.).
+* Updated dependencies to latest stable versions.
+
 ## 0.1.1
 
 * Added `TimeLogCalendar` widget for a modern, expandable calendar UI.

@@ -1,9 +1,9 @@
 name: easy_dev_toolkit
-description: A mixed Material/iOS clean UI toolkit with responsive sizing, adaptive widgets, network helpers, layout utilities, and reusable components — designed to speed up Flutter development.
-version: 0.1.1
-homepage: https://github.com/ajmalm/easy_dev_toolkit
-repository: https://github.com/ajmalm/easy_dev_toolkit
-issue_tracker: https://github.com/ajmalm/easy_dev_toolkit/issues
+description: A comprehensive Flutter toolkit with responsive sizing, adaptive widgets, networking, and storage utilities.
+version: 0.1.2
+homepage: https://github.com/ajutheman/easy_dev_toolkit
+repository: https://github.com/ajutheman/easy_dev_toolkit
+issue_tracker: https://github.com/ajutheman/easy_dev_toolkit/issues
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -12,13 +12,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  connectivity_plus: ^6.1.5
+  connectivity_plus: ^7.0.0
   fluttertoast: ^9.0.0
   dio: ^5.7.0
-  shared_preferences: ^2.3.3
-  path_provider: ^2.0.0
-  encrypt: ^5.0.1
-  google_fonts: ^6.2.1
+  shared_preferences: ^2.5.4
+  path_provider: ^2.1.5
+  encrypt: ^5.0.3
+  google_fonts: ^6.3.3
 
 
 dev_dependencies:

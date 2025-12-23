@@ -3,12 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../core/responsive_extensions.dart';
 
+/// A button that adapts its style based on the target platform (Material for Android/others, Cupertino for iOS/macOS).
 class AdaptiveButton extends StatelessWidget {
+  /// The label text for the button.
   final String text;
+
+  /// The callback that is called when the button is tapped or otherwise activated.
   final VoidCallback onPressed;
+
+  /// Whether the button should be filled with the primary color or transparent.
   final bool filled;
+
+  /// Optional padding around the button content.
   final EdgeInsetsGeometry? padding;
 
+  /// Creates an adaptive button.
   const AdaptiveButton({
     super.key,
     required this.text,
@@ -16,6 +25,14 @@ class AdaptiveButton extends StatelessWidget {
     this.filled = true,
     this.padding,
   });
+
+  /// Creates a filled adaptive button.
+  const AdaptiveButton.filled({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.padding,
+  }) : filled = true;
 
   @override
   Widget build(BuildContext context) {

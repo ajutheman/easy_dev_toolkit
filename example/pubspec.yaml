@@ -12,6 +12,10 @@ dependencies:
   easy_dev_toolkit:
     path: /Users/ajmalm/projectfile/package/easy_dev_toolkit
 
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true

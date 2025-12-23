@@ -26,7 +26,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  easy_dev_toolkit: ^0.1.1
+  easy_dev_toolkit: ^0.1.2
 ```
 
 ---

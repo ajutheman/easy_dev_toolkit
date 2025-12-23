@@ -26,6 +26,7 @@ export 'api/generic_api_service.dart';
 export 'security/encryption_util.dart';
 
 // Widgets
+export 'widgets/badge/adaptive_badge.dart';
 export 'widgets/buttons/adaptive_button.dart';
 export 'widgets/textfields/adaptive_textfield.dart';
 export 'widgets/cards/reusable_card.dart';
