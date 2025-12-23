@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/responsive_extensions.dart';
 import '../../design_system/radius.dart';
-import '../../design_system/shadows.dart';
 
 class ReusableCard extends StatelessWidget {
   final String title;

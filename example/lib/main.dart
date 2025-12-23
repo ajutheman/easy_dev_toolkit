@@ -81,7 +81,7 @@ class _ExampleHomeScreenState extends State<ExampleHomeScreen> {
             ),
             SizedBox(height: 24.h),
             const EmptyState(title: "No Data", message: "Try adding something"),
-            OfflineScreen(onRetry: () => EasyToast.show("Retry pressed")),
+            // OfflineScreen(onRetry: () => EasyToast.show("Retry pressed")),
           ],
         ),
       ),

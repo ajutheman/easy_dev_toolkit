@@ -1,7 +1,7 @@
-import 'package:easy_dev_toolkit/core/responsive_extensions.dart';
+// import 'package:easy_dev_toolkit/core/responsive_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import '../../core/responsive_extensions.dart';
+import '../../core/responsive_extensions.dart';
 
 class AdaptiveButton extends StatelessWidget {
   final String text;

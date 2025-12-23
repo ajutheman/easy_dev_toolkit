@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+/// A utility class for handling responsive sizing based on screen dimensions.
 class SizeConfig {
   static late double screenWidth;
   static late double screenHeight;

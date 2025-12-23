@@ -1,12 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'size_config.dart';
 
+/// Extensions for [num] to simplify responsive sizing.
 extension SizeNumExtensions on num {
   double get w => SizeConfig.w(toDouble());
   double get h => SizeConfig.h(toDouble());
   double get sp => SizeConfig.sp(toDouble());
 }
 
+/// Extensions for [Widget] to simplify common padding and visibility tasks.
 extension WidgetExtensions on Widget {
   Widget paddingAll(double value) =>
       Padding(padding: EdgeInsets.all(value), child: this);

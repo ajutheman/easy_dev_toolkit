@@ -19,9 +19,9 @@ class OfflineBanner extends StatelessWidget {
           width: double.infinity,
           color: Colors.red,
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Icon(Icons.wifi_off, color: Colors.white, size: 18),
               SizedBox(width: 8),
               Text(
